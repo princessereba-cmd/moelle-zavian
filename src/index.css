@@ -1,0 +1,188 @@
+/* ===== MOELLE ZAVIAN — global tokens & base =====
+   Values taken from the reference store's theme settings. */
+:root {
+  /* Colours */
+  --bg: #efefef;            /* page background */
+  --bg-header: #edf0f3;     /* header background */
+  --surface: #ffffff;
+  --text: #1c1c1c;
+  --text-muted: rgba(28, 28, 28, 0.65);
+  --border: #cfcfcf;
+  --dark: #1c1c1c;
+  --light: #ffffff;
+  --error: #b42318;
+
+  /* Type */
+  --font-heading: 'Instrument Sans', system-ui, sans-serif;
+  --font-body: 'Nunito', system-ui, sans-serif;
+  --tracking: 0.18em;
+
+  /* Layout */
+  --nav-h: 72px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --page-width: 1600px;
+  --section-space: clamp(48px, 7vw, 96px);
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  font: 400 15px/1.65 var(--font-body);
+  color: var(--text);
+  background: var(--bg);
+  color-scheme: light;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --nav-h: 60px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+/* Lock page scroll while a drawer/menu is open */
+body.menu-open,
+body.bag-open {
+  overflow: hidden;
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking);
+  line-height: 1.3;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* ===== Reusable buttons ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 36px;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+  color: var(--light);
+  background: var(--dark);
+  border: 1px solid var(--dark);
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 0.35s var(--ease), color 0.35s var(--ease),
+    border-color 0.35s var(--ease);
+}
+
+.btn:hover {
+  background: transparent;
+  color: var(--dark);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* White button for dark backgrounds */
+.btn--light {
+  color: var(--dark);
+  background: var(--light);
+  border-color: var(--light);
+}
+
+.btn--light:hover {
+  background: transparent;
+  color: var(--light);
+}
+
+/* Outline button */
+.btn--outline {
+  color: var(--dark);
+  background: transparent;
+}
+
+.btn--outline:hover {
+  color: var(--light);
+  background: var(--dark);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* Text link with underline */
+.link-underline {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+}
+
+/* Visually hidden but readable by screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
