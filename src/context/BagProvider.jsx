@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import { BagContext } from "./bagContext.js";
+import { products } from "../data/catalog.js";
 
 const STORAGE_KEY = "mz-bag";
 
-// Read the saved bag (if any) when the site first loads
+// Read the saved bag (if any) when the site first loads.
+// Each item's thumbnail is refreshed from the catalog, so bags saved before the
+// images moved from the Shopify CDN to /public still show their pictures.
 function loadBag() {
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    return saved.map((item) => {
+      const image = products[item.handle]?.images[0];
+      return image ? { ...item, image } : item;
+    });
   } catch {
     return [];
   }

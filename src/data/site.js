@@ -1,11 +1,8 @@
 // Site content and small helper functions.
 // Product data lives in catalog.js (generated); everything hand-written lives here.
-import { CDN, collections, categories, products } from "./catalog.js";
+import { collections, categories, products } from "./catalog.js";
 
 export { collections, categories, products };
-
-// Images hosted on the reference store (not yet downloaded locally)
-const STORE = "https://moellezavian.com/cdn/shop/files/";
 
 /* ---------- Local media (files in /public) ---------- */
 export const MEDIA = {
@@ -17,20 +14,17 @@ export const MEDIA = {
   artOfBecomingVideo: "/videos/artOfBecoming-video.mp4",
   // First frame of artOfBecoming-video.mp4 (same frame the reference uses)
   artOfBecomingPoster: "/images/artOfBecoming-poster.jpg",
-  // Not downloaded yet — streams from the reference store's CDN
-  archiveInBloomVideo:
-    "https://moellezavian.com/cdn/shop/videos/c/vp/bc2ea6ec83824a50aed9e70e99ea2d3b/bc2ea6ec83824a50aed9e70e99ea2d3b.HD-1080p-7.2Mbps-86213653.mp4",
-  archiveInBloomPoster:
-    STORE + "preview_images/bc2ea6ec83824a50aed9e70e99ea2d3b.thumbnail.0000000000_800x.jpg?v=1781122955"
+  archiveInBloomVideo: "/videos/archive-in-bloom.mp4",
+  archiveInBloomPoster: "/images/posters/archive-in-bloom-poster.webp"
 };
 
 /* ---------- Helpers ---------- */
 
-// Build an image URL at a given width (Shopify CDN resizes on the fly)
-export function imageUrl(file, width = 800) {
-  const url = file.startsWith("http") || file.startsWith("/") ? file : CDN + file;
-  if (url.startsWith("/")) return url; // local file — no resizing
-  return `${url}${url.includes("?") ? "&" : "?"}width=${width}`;
+// Path for an image file. All media is local (in /public), so the path is used as-is.
+// Callers still pass a width (left over from the Shopify CDN, which resized on the fly);
+// it is ignored.
+export function imageUrl(file) {
+  return file;
 }
 
 // 413000 -> "₦413,000.00"
@@ -86,13 +80,13 @@ export const HOME_COLLECTIONS = {
 };
 
 export const CATEGORY_TILES = [
-  { title: "Dresses", handle: "dresses", image: STORE + "Dresses.jpg?v=1777842854" },
-  { title: "Coords", handle: "coord", image: STORE + "Coord_set.jpg?v=1777842855" },
-  { title: "Jump Suits", handle: "jump-suit", image: STORE + "Jumpsuit.jpg?v=1777842853" }
+  { title: "Dresses", handle: "dresses", image: "/images/categories/dresses.webp" },
+  { title: "Coords", handle: "coord", image: "/images/categories/coord.webp" },
+  { title: "Jump Suits", handle: "jump-suit", image: "/images/categories/jump-suit.webp" }
 ];
 
 export const TESTIMONIALS = [1, 2, 3, 4, 5, 6, 7].map(
-  (n) => `${STORE}Testimonial_${n}.png?v=1778484730`
+  (n) => `/images/testimonials/testimonial-${n}.webp`
 );
 
 /* ---------- Brand copy (from the reference site) ---------- */
@@ -147,6 +141,6 @@ export const DELIVERY_INFO = [
 ];
 
 export const SIZE_GUIDE_IMAGES = [
-  CDN + "IMG_1827.jpg?v=1775424587",
-  CDN + "fb96fc85-2aa6-4c06-9902-af2d1ca98514.jpg?v=1775424678"
+  "/images/size-guide/size-guide-1.webp",
+  "/images/size-guide/size-guide-2.webp"
 ];
